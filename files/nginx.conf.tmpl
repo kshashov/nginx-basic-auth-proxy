@@ -18,12 +18,12 @@ http {
     client_max_body_size ##CLIENT_MAX_BODY_SIZE##;
     proxy_read_timeout ##PROXY_READ_TIMEOUT##;
 
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    include /etc/nginx/conf.d/*.conf;
+
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header Host $host;
 	
-    include /etc/nginx/conf.d/*.conf;
-
     location / {
       proxy_pass ##PROXY_PASS##;
       auth_basic "Restricted";
